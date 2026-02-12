@@ -40,8 +40,8 @@ public class FlightServiceImpl implements FlightService {
         }
 
         LocalDate date = request.departureDate();
-        OffsetDateTime startOfDay = date.atStartOfDay().atOffset(ZoneOffset.UTC);
-        OffsetDateTime endOfDay = date.plusDays(1).atStartOfDay().atOffset(ZoneOffset.UTC);
+        OffsetDateTime startOfDay = date.atStartOfDay().atOffset(ZoneOffset.ofHours(7));
+        OffsetDateTime endOfDay = date.plusDays(1).atStartOfDay().atOffset(ZoneOffset.ofHours(7));
 
         List<Flight> flights = flightRepository.searchFlights(
                 request.originCode().toUpperCase(),

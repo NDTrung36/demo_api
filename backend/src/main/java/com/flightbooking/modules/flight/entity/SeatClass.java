@@ -2,6 +2,8 @@ package com.flightbooking.modules.flight.entity;
 
 import com.flightbooking.common.entity.BaseEntity;
 import jakarta.persistence.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -20,6 +22,7 @@ public class SeatClass extends BaseEntity {
     private Flight flight;
 
     @Enumerated(EnumType.STRING)
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
     @Column(name = "class_type", nullable = false, columnDefinition = "seat_class_type")
     private SeatClassType classType;
 

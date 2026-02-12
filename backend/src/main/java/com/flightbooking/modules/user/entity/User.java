@@ -2,6 +2,8 @@ package com.flightbooking.modules.user.entity;
 
 import com.flightbooking.common.entity.BaseEntity;
 import jakarta.persistence.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 import lombok.*;
 
 @Entity
@@ -26,10 +28,12 @@ public class User extends BaseEntity {
     private String phone;
 
     @Enumerated(EnumType.STRING)
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
     @Column(nullable = false, columnDefinition = "user_role")
     private UserRole role;
 
     @Enumerated(EnumType.STRING)
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
     @Column(nullable = false, columnDefinition = "user_status")
     private UserStatus status;
 

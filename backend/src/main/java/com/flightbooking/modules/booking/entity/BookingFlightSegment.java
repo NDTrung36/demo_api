@@ -4,6 +4,8 @@ import com.flightbooking.common.entity.BaseEntity;
 import com.flightbooking.modules.flight.entity.FlightSegment;
 import com.flightbooking.modules.flight.entity.SeatClass;
 import jakarta.persistence.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 import lombok.*;
 
 @Entity
@@ -28,6 +30,7 @@ public class BookingFlightSegment extends BaseEntity {
     private SeatClass seatClass;
 
     @Enumerated(EnumType.STRING)
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
     @Column(nullable = false, columnDefinition = "segment_direction")
     private SegmentDirection direction;
 

@@ -3,6 +3,8 @@ package com.flightbooking.modules.booking.entity;
 import com.flightbooking.common.entity.BaseEntity;
 import com.flightbooking.modules.user.entity.User;
 import jakarta.persistence.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -26,10 +28,12 @@ public class Booking extends BaseEntity {
     private String bookingReference;
 
     @Enumerated(EnumType.STRING)
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
     @Column(name = "trip_type", nullable = false, columnDefinition = "trip_type")
     private TripType tripType;
 
     @Enumerated(EnumType.STRING)
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
     @Column(nullable = false, columnDefinition = "booking_status")
     private BookingStatus status;
 

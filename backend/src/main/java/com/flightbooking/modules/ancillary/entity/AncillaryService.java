@@ -2,6 +2,8 @@ package com.flightbooking.modules.ancillary.entity;
 
 import com.flightbooking.common.entity.BaseEntity;
 import jakarta.persistence.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -19,6 +21,7 @@ public class AncillaryService extends BaseEntity {
     private String name;
 
     @Enumerated(EnumType.STRING)
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
     @Column(nullable = false, columnDefinition = "ancillary_type")
     private AncillaryType type;
 

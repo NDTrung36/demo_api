@@ -3,6 +3,8 @@ package com.flightbooking.modules.payment.entity;
 import com.flightbooking.common.entity.BaseEntity;
 import com.flightbooking.modules.booking.entity.Booking;
 import jakarta.persistence.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -25,10 +27,12 @@ public class Payment extends BaseEntity {
     private BigDecimal amount;
 
     @Enumerated(EnumType.STRING)
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
     @Column(nullable = false, columnDefinition = "payment_method")
     private PaymentMethod method;
 
     @Enumerated(EnumType.STRING)
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
     @Column(nullable = false, columnDefinition = "payment_status")
     private PaymentStatus status;
 

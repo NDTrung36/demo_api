@@ -5,6 +5,7 @@ import com.flightbooking.modules.flight.dto.FlightDto;
 import com.flightbooking.modules.flight.dto.FlightSearchRequest;
 import com.flightbooking.modules.flight.service.FlightService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,12 +24,12 @@ public class FlightController {
 
     @GetMapping("/search")
     public ResponseEntity<ApiResponse<List<FlightDto>>> searchFlights(
-            @RequestParam String origin,
-            @RequestParam String destination,
-            @RequestParam LocalDate date,
+            @RequestParam String originCode,
+            @RequestParam String destinationCode,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate departureDate,
             @RequestParam(defaultValue = "1") int passengers) {
         FlightSearchRequest request = new FlightSearchRequest(
-                origin, destination, date, passengers);
+                originCode, destinationCode, departureDate, passengers);
 
         List<FlightDto> flights = flightService.searchFlights(request);
         return ResponseEntity.ok(ApiResponse.ok("Flights found: " + flights.size(), flights));

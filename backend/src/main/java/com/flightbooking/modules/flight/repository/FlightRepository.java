@@ -13,23 +13,23 @@ import java.util.List;
 @Repository
 public interface FlightRepository extends JpaRepository<Flight, Long>, JpaSpecificationExecutor<Flight> {
 
-    @Query("""
-            SELECT f FROM Flight f
-            JOIN FETCH f.departureAirport da
-            JOIN FETCH f.arrivalAirport aa
-            JOIN FETCH f.airline al
-            WHERE da.code = :originCode
-              AND aa.code = :destinationCode
-              AND f.departureTime >= :startOfDay
-              AND f.departureTime < :endOfDay
-              AND f.status = 'SCHEDULED'
-            ORDER BY f.departureTime ASC
-            """)
-    List<Flight> searchFlights(
-            @Param("originCode") String originCode,
-            @Param("destinationCode") String destinationCode,
-            @Param("startOfDay") OffsetDateTime startOfDay,
-            @Param("endOfDay") OffsetDateTime endOfDay);
+  @Query("""
+      SELECT f FROM Flight f
+      JOIN FETCH f.departureAirport da
+      JOIN FETCH f.arrivalAirport aa
+      JOIN FETCH f.airline al
+      WHERE da.code = :originCode
+        AND aa.code = :destinationCode
+        AND f.departureTime >= :startOfDay
+        AND f.departureTime < :endOfDay
+        AND f.status = 'SCHEDULED'
+      ORDER BY f.departureTime ASC
+      """)
+  List<Flight> searchFlights(
+      @Param("originCode") String originCode,
+      @Param("destinationCode") String destinationCode,
+      @Param("startOfDay") OffsetDateTime startOfDay,
+      @Param("endOfDay") OffsetDateTime endOfDay);
 
-    List<Flight> findByFlightNumber(String flightNumber);
+  List<Flight> findByFlightNumber(String flightNumber);
 }
